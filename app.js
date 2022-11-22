@@ -1,16 +1,16 @@
-let listaEmpleados = [];
+let listaVehiculos = [];
 
-const objEmpleado = {
+const objVehiculo = {
     id: '',
-    nombre: '',
-    puesto: ''
+    placa: '',
+    estado: ''
 }
 
 let editando = false;
 
 const formulario = document.querySelector('#formulario');
-const nombreInput = document.querySelector('#nombre');
-const puestoInput = document.querySelector('#puesto');
+const placaInput = document.querySelector('#placa');
+const estadoInput = document.querySelector('#estado');
 const btnAgregar = document.querySelector('#btnAgregar');
 
 formulario.addEventListener('submit', validarFormulario);
@@ -18,65 +18,65 @@ formulario.addEventListener('submit', validarFormulario);
 function validarFormulario(e) {
     e.preventDefault();
 
-    if (nombreInput.value === '' || puestoInput.value === '') {
+    if (placaInput.value === '' || estadoInput.value === '') {
         alert('todos los campos son obligatorios.');
         return;
     }
 
     if (editando) {
-        editarEmpleado();
+        editarVehiculo();
         editando = false;
     } else {
-        objEmpleado.id = Date.now();
-        objEmpleado.nombre = nombreInput.value;
-        objEmpleado.puesto = puestoInput.value;
-        agregarEmpleado();
+        objVehiculo.id = Date.now();
+        objVehiculo.placa = placaInput.value;
+        objVehiculo.estado = estadoInput.value;
+        agregarVehiculo();
     }
 }
 
-function agregarEmpleado() {
-    listaEmpleados.push({ ...objEmpleado });
-    mostrarEmpleados();
+function agregarVehiculo() {
+    listaVehiculos.push({ ...objVehiculo});
+    mostrarVehiculos();
     formulario.reset();
     limpiarObjeto();
 
 }
 
 function limpiarObjeto() {
-    objEmpleado.id = '';
-    objEmpleado.nombre = '';
-    objEmpleado.puesto = '';
+    objVehiculo.id = '';
+    objVehiculo.placa = '';
+    objVehiculo.estado = '';
 }
 
 
 
-function mostrarEmpleados() {
+function mostrarVehiculos() {
     limpiarHTML();
-    const divEmpleados = document.querySelector('.div-empleados')
+    const divVehiculos = document.querySelector('.div-vehiculos')
 
-    listaEmpleados.forEach(empleado => {
-        const { id, nombre, puesto } = empleado;
+    listaVehiculos.forEach(Vehiculo => {
+        const { id, placa, estado } = Vehiculo;
 
         const parrafo = document.createElement('p');
-        parrafo.textContent = `${id} - ${nombre} - ${puesto} -`;
+        parrafo.textContent = `${id} - ${placa} - ${estado} -`;
         parrafo.dataset.id = id;
 
         const editarBoton = document.createElement('button');
-        editarBoton.onclick = () => cargarEmpleado(empleado);
+        editarBoton.onclick = () => cargarVehiculo(Vehiculo);
         editarBoton.textContent = 'Editar';
         editarBoton.classList.add('btn', 'btn-editar');
         parrafo.append(editarBoton);
 
         const eliminarBoton = document.createElement('button');
-        eliminarBoton.onclick = () => eliminarEmpleado(id);
+        eliminarBoton.onclick = () => eliminarVehiculo(id);
         eliminarBoton.textContent = 'Eliminar';
         eliminarBoton.classList.add('btn', 'btn-eliminar');
         parrafo.append(eliminarBoton);
 
         const hr = document.createElement('hr');
 
-        divEmpleados.appendChild(parrafo);
-        divEmpleados.appendChild(hr);
+        divVehiculos.appendChild(parrafo);
+        divVehiculos.appendChild(hr);
 
 
 
@@ -86,35 +86,35 @@ function mostrarEmpleados() {
 }
 
 
-function cargarEmpleado(empleado) {
+function cargarVehiculo(Vehiculo) {
 
-    const { id, nombre, puesto } = empleado;
-    nombreInput.value = nombre;
-    puestoInput.value = puesto;
+    const { id, placa, estado } = Vehiculo;
+    placaInput.value = placa;
+    estadoInput.value = estado;
 
-    objEmpleado.id = id;
+    objVehiculo.id = id;
 
     formulario.querySelector('button[type="submit"]').textContent = 'Actualizar';
     editando = true;
 }
 
-function editarEmpleado() {
+function editarVehiculo() {
 
-    objEmpleado.nombre = nombreInput.value;
-    objEmpleado.puesto = puestoInput.value;
+    objVehiculo.placa = placaInput.value;
+    objVehiculo.estado = estadoInput.value;
 
-    listaEmpleados.map(empleado => {
+    listaVehiculos.map(Vehiculo => {
 
-        if (empleado.id === objEmpleado.id) {
-            empleado.id = objEmpleado.id;
-            empleado.nombre = objEmpleado.nombre;
-            empleado.puesto = objEmpleado.puesto;
+        if (Vehiculo.id === objVehiculo.id) {
+            Vehiculo.id = objVehiculo.id;
+            Vehiculo.placa = objVehiculo.placa;
+            Vehiculo.estado = objVehiculo.estado;
 
         }
 
     })
     limpiarHTML();
-    mostrarEmpleados();
+    mostrarVehiculos();
 
     formulario.reset();
 
@@ -122,18 +122,18 @@ function editarEmpleado() {
     editando = false;
 }
 
-function eliminarEmpleado(id) {
+function eliminarVehiculo(id) {
 
-    listaEmpleados = listaEmpleados.filter(empleado => empleado.id !== id);
+    listaVehiculos = listaVehiculos.filter(Vehiculo => Vehiculo.id !== id);
 
     limpiarHTML();
-    mostrarEmpleados();
+    mostrarVehiculos();
 }
 
 
 function limpiarHTML() {
-    const divEmpleados = document.querySelector('.div-empleados');
-    while (divEmpleados.firstChild) {
-        divEmpleados.removeChild(divEmpleados.firstChild);
+    const divVehiculos = document.querySelector('.div-vehiculos');
+    while (divVehiculos.firstChild) {
+        divVehiculos.removeChild(divVehiculos.firstChild);
     }
 }
