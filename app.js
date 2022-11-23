@@ -62,7 +62,7 @@ function mostrarVehiculos() {
         const { id, placa, estado } = Vehiculo;
 
         const parrafo = document.createElement('p');
-        parrafo.textContent = `${id} - ${placa} - ${estado} -`;
+        parrafo.textContent = `${placa} - ${estado} -`;
         parrafo.dataset.id = id;
 
         const editarBoton = document.createElement('button');
