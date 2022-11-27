@@ -60,7 +60,7 @@ function mostrarVehiculos() {
 
     listaVehiculos.forEach(Vehiculo => {
         const { id, placa, estado } = Vehiculo;
-
+//Revisar------
         const parrafo = document.createElement('p');
         parrafo.textContent = `${placa} - ${estado} -`;
         parrafo.dataset.id = id;
