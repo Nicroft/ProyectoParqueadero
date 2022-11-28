@@ -131,3 +131,5 @@ function limpiarHTML() {
         divVehiculos.removeChild(divVehiculos.firstChild);
     }
 }
+
+// Nuevo codigo de prueba............
