@@ -8,6 +8,7 @@ img {
 
 p {
     font-size: 70px;
+    text-align: left;
     color: black;
     background-image: url(img/placa.png); 
     background-repeat: no-repeat;
